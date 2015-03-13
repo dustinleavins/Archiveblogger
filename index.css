@@ -1,0 +1,62 @@
+body {
+  margin: 2em 2em 0 2em;
+  color: #333333;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Verdana', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #333333;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Verdana', sans-serif;
+}
+
+button {
+  background: #AAAAFF;
+  border: 2px solid #8888DD;
+  border-radius: 5px;
+  color: #333333;
+  padding: 10px;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Verdana', sans-serif;
+  font-weight: bold;
+  font-size: 100%;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+  background: #7777CC;
+  border: 2px solid #5555AA;
+
+}
+
+button.red {
+  background: #FFAAAA;
+  border: 2px solid #DD8888;
+}
+
+button.red:focus {
+  background: #CC7777;
+  border: 2px solid #AA5555;
+}
+
+header {
+  border: solid #888888;
+  border-width: 0 0 2px 0;
+}
+
+input[type='text'] {
+  padding: 5px;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Verdana', sans-serif;
+  font-size: 100%;
+  border: 2px solid #888888;
+  border-radius: 5px;
+}
+
+input[type='text']:focus {
+  outline: none;
+  box-shadow: none;
+  border: 2px solid #555555;
+}
+
+.post-input {
+  width: 100%;
+}
