@@ -1,5 +1,5 @@
 {
-  "name": "Liveblogging",
+  "name": "Archiveblogging",
   "version": "0.0.1",
   "description": "Some sort of 'after the fact' liveblogging platform.",
   "main": "index.js",
