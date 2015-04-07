@@ -5,6 +5,8 @@ var React = require('react');
 var moment = require('moment');
 require('moment-duration-format');
 
+var ExportPreviousEvent = require('./ExportPreviousEvent.js');
+
 var PreviousEvent = React.createClass({
     _item: function(post) {
         var niceTimestamp = moment.duration(post.timestamp)
@@ -23,6 +25,7 @@ var PreviousEvent = React.createClass({
             return (
                 <div>
                     <h2>Previous Event</h2>
+                    <ExportPreviousEvent data={this.props.data} />
                     <p>Started: {this.props.data.start.format(formatString)}</p>
                     <p>Ended: {this.props.data.stop.format(formatString)}</p>
                     <p>Duration (excluding pauses): {formattedDuration}</p>
