@@ -1,12 +1,12 @@
-// Copyright (c) 2015 Dustin Leavins
+// Copyright (c) 2015, 2021 Dustin Leavins
 // See the file 'LICENSE.md' for copying permission.
 
 var React = require('react');
 var dispatcher = require('../dispatcher/AppDispatcher.js');
 var store = require('../stores/AppStore.js');
 
-var PauseButton = React.createClass({
-    handleClick: function(e) {
+class PauseButton extends React.Component{
+    handleClick(e) {
         e.preventDefault(e);
 
         if (store.getPauseStart()) {
@@ -14,9 +14,9 @@ var PauseButton = React.createClass({
         } else {
             dispatcher.dispatch({actionType: 'pause'});
         }
-    },
+    }
 
-    render: function() {
+    render() {
         var pausedContent;
         if (this.props.isPaused) {
             pausedContent = 'Continue';
@@ -27,7 +27,7 @@ var PauseButton = React.createClass({
         return (
             <button onClick={this.handleClick}>{pausedContent}</button>
         );
-    },
-});
+    }
+};
 
 module.exports = PauseButton;

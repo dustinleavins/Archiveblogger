@@ -1,4 +1,4 @@
-// Copyright (c) 2015 Dustin Leavins
+// Copyright (c) 2015, 2021 Dustin Leavins
 // See the file 'LICENSE.md' for copying permission.
 
 var React = require('react');
@@ -7,16 +7,16 @@ require('moment-duration-format');
 
 var ExportPreviousEvent = require('./ExportPreviousEvent.js');
 
-var PreviousEvent = React.createClass({
-    _item: function(post) {
+class PreviousEvent extends React.Component{
+    _item(post) {
         var niceTimestamp = moment.duration(post.timestamp)
             .format('hh:mm:ss', { trim: false });
         return (
             <p key={post.timestamp}>{niceTimestamp} - {post.text}</p>
         );
-    },
+    }
 
-    render: function() {
+    render() {
         if (this.props.data && this.props.data.posts) {
             var formatString = 'MMMM D, YYYY hh:mm:ss';
             var formattedDuration = moment.duration(this.props.data.duration)
@@ -38,6 +38,6 @@ var PreviousEvent = React.createClass({
             return <div />
         }
     }
-});
+};
 
 module.exports = PreviousEvent;

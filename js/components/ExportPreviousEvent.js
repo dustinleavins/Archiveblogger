@@ -1,12 +1,12 @@
-// Copyright (c) 2015 Dustin Leavins
+// Copyright (c) 2015, 2021 Dustin Leavins
 // See the file 'LICENSE.md' for copying permission.
 
 var React = require('react');
 var moment = require('moment');
 require('moment-duration-format');
 
-var ExportPreviousEvent = React.createClass({
-    dataToMarkdown: function() {
+class ExportPreviousEvent extends React.Component{
+    dataToMarkdown() {
         if (!this.props || !this.props.data) {
             return '';
         }
@@ -41,9 +41,9 @@ var ExportPreviousEvent = React.createClass({
         }
 
         return mdContents.join('');
-    },
+    }
 
-    handleMarkdownClick: function(evt) {
+    handleMarkdownClick(evt) {
         evt.preventDefault();
         evt.target.blur();
 
@@ -55,19 +55,19 @@ var ExportPreviousEvent = React.createClass({
         var content = ['# Testing'];
         var mdBlob = new Blob([this.dataToMarkdown()], { type: 'text/plain' });
         window.open(URL.createObjectURL(mdBlob));
-    },
+    }
 
-    render: function() {
+    render() {
         if (!this.props || !this.props.data) {
             return <div />;
         }
 
         return (
             <div>
-                <button onClick={this.handleMarkdownClick}>Export to Markdown</button>
+                <button onClick={this.handleMarkdownClick.bind(this)}>Export to Markdown</button>
             </div>
         );
-    },
-});
+    }
+};
 
 module.exports = ExportPreviousEvent;

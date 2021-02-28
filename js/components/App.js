@@ -1,4 +1,4 @@
-// Copyright (c) 2015 Dustin Leavins
+// Copyright (c) 2015, 2021 Dustin Leavins
 // See the file 'LICENSE.md' for copying permission.
 
 var React = require('react');
@@ -19,22 +19,21 @@ var PauseButton = require('./PauseButton.js');
 
 var EventTimer = require('./EventTimer.js');
 
-var App = React.createClass({
-    handleSubmit: function(e) {
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = this._generateState();
+    }
+    handleSubmit(e) {
         e.preventDefault();
         if (store.getStart() !== null) {
             dispatcher.dispatch({actionType: 'stop'});
         } else {
             dispatcher.dispatch({actionType: 'start'});
         }
-    },
+    }
 
-    getInitialState: function() {
-        return this._generateState();
-    },
-
-
-    render: function() {
+    render() {
         if (this.state.isInEditMode) {
             return (
                 <form onSubmit={this.handleSubmit}>
@@ -57,21 +56,21 @@ var App = React.createClass({
                 </form>
             );
         };
-    },
+    }
 
-    componentDidMount: function() {
-        store.on('start', this._onChange);
-        store.on('stop', this._onChange);
-        store.on('pauseChanged', this._onChange);
-    },
+    componentDidMount() {
+        store.on('start', this._onChange.bind(this));
+        store.on('stop', this._onChange.bind(this));
+        store.on('pauseChanged', this._onChange.bind(this));
+    }
 
-    componentDidUnmount: function() {
-        store.removeListener('start', this._onChange);
-        store.removeListener('stop', this._onChange);
-        store.removeListener('pauseChanged', this._onChange);
-    },
+    componentWillUnmount() {
+        store.removeListener('start', this._onChange.bind(this));
+        store.removeListener('stop', this._onChange.bind(this));
+        store.removeListener('pauseChanged', this._onChange.bind(this));
+    }
 
-    _onChange: function(eventObj) {
+    _onChange(eventObj) {
         var newState;
         if (eventObj) {
             newState = objAssign(this._generateState(), {
@@ -87,9 +86,9 @@ var App = React.createClass({
         }
 
         this.setState(newState);
-    },
+    }
 
-    _generateState: function() {
+    _generateState() {
         return {
             isInEditMode: store.getStart() !== null,
             isPaused: store.getPauseStart() !== null,
@@ -97,6 +96,6 @@ var App = React.createClass({
 
         };
     }
-});
+};
 
 module.exports = App;

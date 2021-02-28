@@ -1,4 +1,4 @@
-// Copyright (c) 2015 Dustin Leavins
+// Copyright (c) 2015, 2021 Dustin Leavins
 // See the file 'LICENSE.md' for copying permission.
 
 var React = require('react');
@@ -7,35 +7,36 @@ var AppStore = require('../stores/AppStore.js');
 
 require('moment-duration-format');
 
-var EventTimer = React.createClass({
-    getInitialState: function() {
-        return {
-            elapsedTime: 0,
-        };
-    },
+class EventTimer extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            elapsedTime: 0
+        }
+    }
 
-    _onTimer: function() {
+    _onTimer() {
         this.setState({
             elapsedTime: AppStore.getElapsedTime(),
         });
-    },
+    }
 
-    componentDidMount: function() {
-        this._interval = setInterval(this._onTimer, 500);
-    },
+    componentDidMount() {
+        this._interval = setInterval(this._onTimer.bind(this), 500);
+    }
 
-    componentWillUnmount: function() {
+    componentWillUnmount() {
         clearInterval(this._interval);
-    },
+    }
 
-    render: function() {
+    render() {
         var time = moment.duration(this.state.elapsedTime)
                 .format('hh:mm:ss', { trim: false });
 
         return (
             <span>{time}</span>
         );
-    },
-});
+    }
+};
 
 module.exports = EventTimer;
